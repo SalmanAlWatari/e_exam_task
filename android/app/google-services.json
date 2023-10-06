@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "262418773683",
+    "project_id": "e-exam-task",
+    "storage_bucket": "e-exam-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262418773683:android:4f810c5ea12f062d5962c6",
+        "android_client_info": {
+          "package_name": "com.example.e_exam_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcVyW4g5wqniVaq1b8cqA0flw56HZvUkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
