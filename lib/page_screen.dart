@@ -4,15 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//dart file contain leader_board_dialog
 import 'leader_board_dialog.dart';
 
+
+
+//Parameters that holding the Values of Radio options
 enum OptionsQuesOne { one, two }
-
 enum OptionsQuesTwo { one, two }
-
 enum OptionsQuesThree { one, two }
 
+
+/*
+Int Array that holding the  indexes of the correct Answers in Radio options
+   OptionsQuesOne { one, two }      =>       [1]
+   OptionsQuesTwo { one, two }      =>       [0]
+   OptionsQuesThree { one, two }    =>       [0]   then [1, 0, 0]
+ */
 const indexesOfCorrectAnswers = [1, 0, 0];
+
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
   'email',
@@ -368,6 +378,9 @@ class _HomePageState extends State<HomePage> {
     var gradePerQuest = 33.33333333333333;
     //var errorMessage = "";
 
+    /*
+       calculate The Score or Grade Of Exam
+    */
 
     scoreTmp +=
     (_answerOne?.index == indexesOfCorrectAnswers[0]) ? gradePerQuest : 0;
@@ -376,6 +389,10 @@ class _HomePageState extends State<HomePage> {
     scoreTmp +=
     (_answerThree?.index == indexesOfCorrectAnswers[2]) ? gradePerQuest : 0;
 
+
+    /*
+       calculate The number or the count for the Answers that is correct
+    */
     correctTmp += (_answerOne?.index == indexesOfCorrectAnswers[0]) ? 1 : 0;
     correctTmp += (_answerTwo?.index == indexesOfCorrectAnswers[1]) ? 1 : 0;
     correctTmp += (_answerThree?.index == indexesOfCorrectAnswers[2]) ? 1 : 0;
@@ -383,7 +400,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       score = scoreTmp;
       correctAnswers = correctTmp;
-
       submitOrDownloadExamResult(isSubmit: true);
     });
 
@@ -392,13 +408,25 @@ class _HomePageState extends State<HomePage> {
 
   submitOrDownloadExamResult({required bool isSubmit}){
 
+    //check if _currentUser is null ,, Sing In Required because of using the email as ID in the document in Firebase.
     if(_currentUser == null){
-      showLeaderboardDialog(isError: true, errMsg: "Sing In Required, can't Saving or Loading data!!!");
+      showLeaderboardDialog(isError: true, errMsg: "Sing In Required, Error Saving or Loading data!");
       return;
     }
 
+
+
     var db = FirebaseFirestore.instance;
 
+
+
+
+
+    /* if Submit is clicked the exam result will be saved to Firebase store then show result.
+
+       else the result downloading using email as ID of the Doc from Firebase store so showing result if exist.
+       if not found, will display message no data yet
+    */
     if(isSubmit){
 
       final data = <String, dynamic>{
@@ -415,6 +443,7 @@ class _HomePageState extends State<HomePage> {
 
 
     }
+
     else {
 
       db.collection("users")
@@ -432,7 +461,7 @@ class _HomePageState extends State<HomePage> {
             showLeaderboardDialog(isError: false, errMsg: "");
           }
           else {
-            showLeaderboardDialog(isError: true, errMsg: "Error loading data. No Data yet !!!");
+            showLeaderboardDialog(isError: true, errMsg: "Error loading data.No Data yet!");
           }
         });
 
