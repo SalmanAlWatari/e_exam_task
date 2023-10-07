@@ -1,9 +1,12 @@
 import 'package:e_exam_task/firebase_options.dart';
-import 'package:e_exam_task/page_screen.dart';
+import 'package:e_exam_task/page_screen_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter/foundation.dart';
+
+import 'blocs/google_user_bloc.dart';
 
 void main() async {
 
@@ -36,6 +39,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context)=> GoogleUserBloc())],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const HomePage(),
+      ),
+    );
+  }
+}
+
+
+/*
+
+
+ @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -46,4 +70,4 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
     );
   }
-}
+ */
