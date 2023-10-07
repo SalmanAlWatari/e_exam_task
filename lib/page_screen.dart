@@ -410,7 +410,7 @@ class _HomePageState extends State<HomePage> {
 
     //check if _currentUser is null ,, Sing In Required because of using the email as ID in the document in Firebase.
     if(_currentUser == null){
-      showLeaderboardDialog(isError: true, errMsg: "Sing In Required, Error Saving or Loading data!");
+      showLeaderboardDialog(isError: true, errMsg: "Sing In Required, can't Saving or Loading data!");
       return;
     }
 
@@ -461,7 +461,7 @@ class _HomePageState extends State<HomePage> {
             showLeaderboardDialog(isError: false, errMsg: "");
           }
           else {
-            showLeaderboardDialog(isError: true, errMsg: "Error loading data.No Data yet!");
+            showLeaderboardDialog(isError: true, errMsg: "No Data yet! for current user.");
           }
         });
 
